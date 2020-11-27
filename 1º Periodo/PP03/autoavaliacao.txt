@@ -1,0 +1,13 @@
+Requisitos que não foram cumpridos 
+ou parcialmente atendidos:
+
+NENHUM.
+
+--
+Horas dedicadas por cada membro da equipe ao trabalho 
+e nota atribuída a si mesmo:
+
+Lucas    - 32 Horas - Nota 8.7
+Clayton  - 32 Horas - Nota 8.5
+Mateus   - 32 Horas - Nota 8.9
+Fernando - 32 Horas - Nota 9.5
