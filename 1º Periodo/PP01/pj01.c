@@ -24,7 +24,8 @@ int main(){
     }
     else
     {
-         __fpurge(stdin);
+        fflush(stdin);
+        // __fpurge(stdin);
         printf("Quantos valores serão decodificados ?");
         scanf("%d", &tam);
         input_char= malloc (tam * sizeof(int));// Realizo o malloc com o tamanho exato de numeros a serem verificados
