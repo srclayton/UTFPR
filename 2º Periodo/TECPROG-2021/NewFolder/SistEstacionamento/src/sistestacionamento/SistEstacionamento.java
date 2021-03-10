@@ -8,14 +8,8 @@ import java.util.Scanner;
 class Horario{
     private int hora,min;
     
-    private int getHora(){
-        return hora;
-    }
-    private int getMin(){
-        return min;
-    }
-    public boolean setHora(int input){
-        if(input >= 0 && input <= 24){
+    public boolean setHora(int input){ //Metodo para armazenar as horas de entrada! verifica se as horas estão no intervalo 01h à 24h, caso contrario retorna um bool falso.
+        if(input > 0 && input <= 24){
             hora = input;
             return true;
         }
@@ -24,7 +18,7 @@ class Horario{
             return false;
         }
     }
-    public boolean setMin(int input){
+    public boolean setMin(int input){//Metodo para armazenar os minutos de entrada! verifica se os minutos estão no intervalo 0min à 60min, caso contrario retorna um bool falso.
         if(input >= 0 && input <= 60){
             min = input;
             return true;
@@ -34,9 +28,16 @@ class Horario{
             return false;
         }
     }
+    /*---------------------------------------------------------------------------
+    Caso o cliente saia depois das 24h ha de se calcular um "novo horario de entrada"
+    Exemplo: Caso o cliente entre as 24h. e saia as 06h. da manhã, faço o seguinte calculo:
+                      360  +  1440 = 1800  <----------novo horario de saida;
+    horario de saida --^    +    ^-- horario de entrada
+    em seguida faço o novo horario de saida - horaio de entrada = 360 minutos (6h.)     
+    ----------------------------------------------------------------------------*/
     public int calcularIntervalo(Horario h){
          int aux=0;
-         if(h.hora < this.hora){
+         if(h.hora < this.hora){ // caso o cliente entre as 24h. e saia as 06h da manhã, faço o seguinte calculo p
              aux = (h.hora * 60)  + (this.hora * 60);
              h.hora = aux / 60;
          }
@@ -72,7 +73,7 @@ class Principal{
     private void calculaValorAPagar (){
         if(intervalo <= 180){
             valorAPagar = (float) 4.50;
-        }else if(intervalo > 180 && intervalo <= 720){
+        }else if(intervalo > 180 && intervalo <= 720){ //os minutos excedentes a cada 15min.
             int aux = intervalo - 180;
             aux /= 15;
             valorAPagar = (float) 4.50 + (aux * (float) 0.75);

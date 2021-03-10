@@ -22,18 +22,27 @@ class StringInverse{
             return true;
         }
     }  
+    /* METODO inverteFrase
+    --------------------------------------------------------------------------------------------------------
+    este metodo percorre toda a string letra por letra começando de seu final para o inicio. 
+    percorro toda string procurando um espaço " " caso a ache, pego sua substringo no intervalo i=(n) e j=(m)
+    e concateno esta substring na variavel fraseInver.
+    --------------------------------------------------------------------------------------------------------
+    */
     public void inverteFrase(){
         String aux = frase;
         char letra;
         int tam=aux.length();
-        for(int i =tam-1,j=0;i>0;i--){
+        for(int i =tam-1,j=tam;i>=0;i--){
             letra = aux.charAt(i);
             if(letra == ' '){
-                //fraseInver += aux.substring(j,i);
-                System.out.println(aux.substring(j,i));
-                i=j;
-            }
-            
+                fraseInver += aux.substring(i,j);
+                //System.out.println(i + aux.substring(i,j));
+                j=i;
+            }else if(i==0){
+                //System.out.println(i + aux.substring(i,j));
+                fraseInver += " " + aux.substring(i,j);
+            }            
         }
         System.out.println(fraseInver);
     }
@@ -66,5 +75,4 @@ public class StringInversa {
         Principal iniciar = new Principal();
         iniciar.exe();
     }
-    
 }
