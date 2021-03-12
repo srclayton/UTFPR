@@ -44,7 +44,6 @@ class StringInverse{
                 fraseInver += " " + aux.substring(i,j);
             }            
         }
-        System.out.println(fraseInver);
     }
 }
 
@@ -56,8 +55,8 @@ class Principal{
         System.out.println("Informe a frase desejada:");
         if(texto.setFrase(scanf.nextLine())){
             texto.inverteFrase();
-        }
-                    
+            System.out.println(texto.getFrase());
+        }                    
     }
 }
 

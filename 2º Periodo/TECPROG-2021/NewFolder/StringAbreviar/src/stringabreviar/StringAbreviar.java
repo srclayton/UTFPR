@@ -32,6 +32,7 @@ class Nomes{
             letra = nome.charAt(i);
             if(letra == ' '){
                 if(k>1 && k<5){
+                    //nome com 3 letras cai nesse IF ex EVA
                    nomeAbreviado += " " + nome.substring(j,i); 
                 }               
                 else{                    
