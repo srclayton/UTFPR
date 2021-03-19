@@ -101,11 +101,11 @@ void menu(){
     cout << "\n|3- Inserir um dado na 'N' posição da lista;   |";
     cout << "\n|4- Retirar um dado no inicio da lista;        |";
     cout << "\n|5- Retirar um dado no final da lista;         |";
-    cout << "\n|7- Retirar um dado na 'N' posição da lista;   |";
-    cout << "\n|8- Procurar um dado com o RG                  |";
-    cout << "\n|9- Mostrar todos os dados;                    |";
-    cout << "\n|10- Salvar a lista em um arquivo;             |";
-    cout << "\n|11- Ler uma lista de dados;                   |";
+    cout << "\n|6- Retirar um dado na 'N' posição da lista;   |";
+    cout << "\n|7- Procurar um dado com o RG                  |";
+    cout << "\n|8- Mostrar todos os dados;                    |";
+    cout << "\n|9- Salvar a lista em um arquivo;             |";
+    cout << "\n|10- Ler uma lista de dados;                   |";
     cout << "\n|0- Retirar um dado no inicio da lista;        |";
     cout << "\n================================================\n";
 }
@@ -114,15 +114,19 @@ void limpaBufferDoTeclado(){
     fflush(stdin);
 }
 void printa(Lista* li){
-    for (int i = 0; i < li->qtd-1; i++)
-        cout << "Nome: " << li->dados[i].nome; //<< " RG: " << li->dados[i].rg;
+    Pessoa aux;
+    for (int i = 0; i < li->qtd-1; i++){
+        aux = li->dados[i];
+        cout << "Nome: " << aux.nome; //<< " RG: " << li->dados[i].rg;
+    }
+        
 }
 void executar(int escolha){
     Lista *li;
     Pessoa input;
     li = cria_lista();
     if(escolha==1){
-        system("clear");
+        //system("clear");
         limpaBufferDoTeclado();
         cout << "\nDigite o nome desejado:";
         cin >> input.nome;
@@ -130,6 +134,7 @@ void executar(int escolha){
         cout << "\nDigite o RG:";
         cin >> input.rg;
         insere_lista_inicio(li,input);
+        cout << li->dados[0].nome << li->dados[0].rg;
     }else if(escolha ==2){
 
     }else if(escolha ==3){
@@ -155,11 +160,10 @@ void executar(int escolha){
     }else{
 
     }
+    /*Pessoa aux;
+    aux = li->dados[0];
 
-    for (int i = 0; i < li->qtd-1; i++)
-    {
-        cout << "NOME:" << li->dados[i].nome;
-    }
+    cout << aux.nome;*/
     
 }
 int main(){
