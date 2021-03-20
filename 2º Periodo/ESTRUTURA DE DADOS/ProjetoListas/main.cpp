@@ -12,8 +12,7 @@ int main()
         system("clear");
         executar(escolha, li);
     }
-    
-
+    apaga_lista(li);
     /*Pessoa x, y, z, h, i, j;
     x.nome="DANIEL";
     x.rg=123456;
@@ -39,7 +38,6 @@ int main()
     escreve_arquivo(li);*/
     //abrir_e_ler_arquivo(li);
     //printaLista(li);
-
     return 0;
 }
 

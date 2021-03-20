@@ -4,7 +4,9 @@
 #include <fstream>
 #include <string.h>
 #include <unistd.h>
-#define TAM 10
+#include <time.h>
+#define TAM 1000000
+#define NOME_ARQUIVO "src/NomeRG1M.txt"
 using namespace std;
 
 struct pessoa{
@@ -15,6 +17,7 @@ typedef struct lista Lista;
 typedef pessoa Pessoa;
 
 Lista* cria_lista();
+void apaga_lista(Lista* li);
 bool adiciona_lista_inicio(Lista* li, Pessoa dado);
 bool adiciona_lista_final(Lista* li, Pessoa dado);
 bool adiciona_lista_n_posicao(Lista* l1, Pessoa dado, int posicao);

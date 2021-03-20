@@ -134,33 +134,42 @@ bool procura_rg(Lista* li, int inputRg){
     return 0;
 }
 void escreve_arquivo(Lista* li){
-    ofstream myfile("ListaEscrita.txt");
+    ofstream myfile("src/ListaEscrita.txt");
     if(myfile.is_open()){
         for(int i=0; i< li->qntd;i++)
             myfile << li->dados[i].nome << "," << li->dados[i].rg << "\n";
         cout << "Lista salva com sucesso!";   
     }else
-        cout << "Não foi possivel abrir o arquivo!";
+        cout << "Não foi possivel salvar o arquivo!";
 }
 void abrir_e_ler_arquivo(Lista* li){
     string linha, inputNome, rgString;
-    int inputRg, tamLinha,localizaEspaco=0,i=0;
-    ifstream myfile("NomeRG10.txt");
+    int inputRg, tamLinha,localizaEspaco=0,i=li->qntd, k=0,aux=0;
+    ifstream myfile(NOME_ARQUIVO);
     if(myfile.is_open()){
         while (getline(myfile,linha))
-        {
-            localizaEspaco = linha.find(","); // localiza a primeira virgula;
-            tamLinha= linha.size(); // recebo o tamanho da minha linha;
-            inputNome=linha.substr(0,localizaEspaco); // retorno a string da posição 0 até a virgula;
-            rgString = linha.substr(localizaEspaco+1,tamLinha); // recebo o RG em string obs : +2 para retirar a ',' e o 'espaço';
-            inputRg = stoi(rgString);
-            li->dados[i].nome= inputNome;
-            li->dados[i].rg= inputRg;
-            li->qntd++;
-            i++;
-            li->numDeCopi++;
+        {   
+            if(li->qntd!=TAM){
+                li->numDeCompa++;
+                localizaEspaco = linha.find(","); // localiza a primeira virgula;
+                tamLinha= linha.size(); // recebo o tamanho da minha linha;
+                inputNome=linha.substr(0,localizaEspaco); // retorno a string da posição 0 até a virgula;
+                rgString = linha.substr(localizaEspaco+1,tamLinha); // recebo o RG em string obs : +2 para retirar a ',' e o 'espaço';
+                inputRg = stoi(rgString);
+                li->dados[i].nome= inputNome;
+                li->dados[i].rg= inputRg;
+                li->qntd++;
+                i++;
+                k++;
+                li->numDeCopi++;
+            }else{
+                cout << "Não foi possivel adicionar os dados " << k << "em diante."; 
+                myfile.close();
+                aux=1;
+            }  
         }
-        cout << "Lista aberta com sucesso!";    
+        if(aux!=1)
+            cout << "Lista aberta com sucesso!";    
 
     }else
         cout << "Não foi possivel abrir o arquivo!";
@@ -190,6 +199,8 @@ void executar(int escolha, Lista* li){
     Pessoa inputDado;
     bool retorno;
     int posicao, inputRg;
+    long double tempoDeExecucao;
+    clock_t inicioDaFuncao, finalDaFuncao;
     if(escolha==1){ // INSERE UM DADO NO INICIO DA LISTA
         limpaBufferDoTeclado();
         cout << "\nDigite o nome desejado:";
@@ -197,6 +208,7 @@ void executar(int escolha, Lista* li){
         limpaBufferDoTeclado();
         cout << "\nDigite o RG:";
         cin >> inputDado.rg;
+        inicioDaFuncao = clock();
         retorno = adiciona_lista_inicio(li, inputDado);
         if(!retorno){
             cout << "ATENÇÃO      ";
@@ -205,7 +217,9 @@ void executar(int escolha, Lista* li){
             cout << "ATENÇÃO      ";
             cout << "Dado adicionado com sucesso!."; 
         }
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==2){ // INSERE UM DADO NO FINAL DA LISTA
         limpaBufferDoTeclado();
@@ -214,6 +228,7 @@ void executar(int escolha, Lista* li){
         limpaBufferDoTeclado();
         cout << "\nDigite o RG:";
         cin >> inputDado.rg;
+        inicioDaFuncao = clock();
         retorno = adiciona_lista_final(li, inputDado);
         if(!retorno){
             cout << "ATENÇÃO      ";
@@ -222,7 +237,9 @@ void executar(int escolha, Lista* li){
             cout << "ATENÇÃO      ";
             cout << "Dado adicionado com sucesso!."; 
         }       
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;       
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";    
         system("clear");        
     }else if(escolha ==3){ // INSERE UM DADO NA N POSIÇÃO DA LISTA
         limpaBufferDoTeclado();
@@ -234,6 +251,7 @@ void executar(int escolha, Lista* li){
         limpaBufferDoTeclado();
         cout << "\nDigite a posição:";
         cin >> posicao;
+        inicioDaFuncao = clock();
         retorno = adiciona_lista_n_posicao(li, inputDado, posicao);
         if(!retorno){
             cout << "ATENÇÃO      ";
@@ -242,56 +260,79 @@ void executar(int escolha, Lista* li){
             cout << "ATENÇÃO      ";
             cout << "Dado adicionado com sucesso!."; 
         }  
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==4){ // REMOVE UM DADO NO INICIO DA LISTA
+        inicioDaFuncao = clock ();
         retorno = remove_lista_inicio(li);
         if(!retorno)
             cout << "Não foi possivel remover.";
         else
             cout << "Dado retirado com sucesso!";
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==5){ // REMOVE UM DADO NO FINAL DA LISTA
+        inicioDaFuncao = clock();
         retorno = remove_lista_final(li);
         if(!retorno)
             cout << "Não foi possivel remover.";
         else    
             cout << "Dado retirado com sucesso!";
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==6){ // REMOVE UM DADO NA N POSIÇÃO DA LISTA
         limpaBufferDoTeclado();
         cout << "\nDigite a posição:";
         cin >> posicao;
+        inicioDaFuncao = clock();
         retorno = remove_lista_n_posicao(li, posicao);
         if(!retorno)
             cout << "Não foi possivel remover.";
         else
             cout << "Dado retirado com sucesso!";
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==7){ // FAZ A BUSCA DE UM RG NA LISTA
         limpaBufferDoTeclado();
         cout << "\nDigite o RG:";
         cin >> inputRg;
+        inicioDaFuncao = clock();
         retorno = procura_rg(li, inputRg);
         if(!retorno)
             cout << "Não foi possivel encontrar este RG.";
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao = clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==8){
+        inicioDaFuncao = clock();
         printaLista(li);
+        finalDaFuncao = clock();
+        tempoDeExecucao= finalDaFuncao - inicioDaFuncao;
         sleep(3);
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==9){
+        inicioDaFuncao= clock();
         escreve_arquivo(li);
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao= clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==10){
+        inicioDaFuncao = clock();
         abrir_e_ler_arquivo(li);
-        cout << "C(n):" << li->numDeCompa << "|" << "M(n):" <<  li->numDeCopi;
+        finalDaFuncao= clock();
+        tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }
     /*Pessoa aux;
