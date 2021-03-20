@@ -25,7 +25,7 @@ int main()
     h.rg=88;
     i.nome="alberto";
     i.rg=5555;
-    j.nome="cabare";
+    j.nome="jason";
     j.rg=6666;
     adiciona_lista_inicio(li,x);
     adiciona_lista_final(li,y);
