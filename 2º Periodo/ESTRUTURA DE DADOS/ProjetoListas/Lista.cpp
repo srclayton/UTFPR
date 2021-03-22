@@ -1,13 +1,14 @@
 #include "Lista.h"
+
 using namespace std;
 struct lista{
     int qntd,numDeCopi,numDeCompa;
     Pessoa dados[TAM];
 };
 
-Lista* cria_lista(){
-    Lista *li;
-    li = new Lista;
+Lista_Seq* cria_lista(){
+    Lista_Seq *li;
+    li = new Lista_Seq;
     if(li != NULL){
         li->qntd=0;
         li->numDeCompa=0;
@@ -15,10 +16,10 @@ Lista* cria_lista(){
     }
     return li;
 }
-void apaga_lista(Lista* li){
+void apaga_lista(Lista_Seq* li){
     free(li);
 }
-bool adiciona_lista_inicio(Lista* li, Pessoa dado){
+bool adiciona_lista_inicio(Lista_Seq* li, Pessoa dado){
     int i;
     if(li == NULL)
         return 0; // Lista nula
@@ -34,7 +35,7 @@ bool adiciona_lista_inicio(Lista* li, Pessoa dado){
     li->qntd++;// encremento a quantidade de Pessoas na minha lista;
     return 1; // Retorno true;
 }
-bool adiciona_lista_final(Lista* li, Pessoa dado){
+bool adiciona_lista_final(Lista_Seq* li, Pessoa dado){
     if(li==NULL)
         return 0; // return false;
     li->numDeCompa++;
@@ -45,15 +46,15 @@ bool adiciona_lista_final(Lista* li, Pessoa dado){
     li->qntd++;
     return 1;
 }
-bool printaLista(Lista* li){
+bool printaLista(Lista_Seq* li){
     if(li==NULL)
         return 0;
     li->numDeCompa++;
     for (int i = 0; i < li->qntd; i++)
-        cout << li->dados[i].nome << ", "<< li->dados[i].rg <<"\n";   
+        cout << i+1 << "° " << li->dados[i].nome << ", "<< li->dados[i].rg <<"\n";   
     return 1; 
 }
-bool adiciona_lista_n_posicao(Lista* li, Pessoa dado, int posicao){
+bool adiciona_lista_n_posicao(Lista_Seq* li, Pessoa dado, int posicao){
     if(li==NULL)
         return 0;
     li->numDeCompa++;
@@ -76,7 +77,7 @@ bool adiciona_lista_n_posicao(Lista* li, Pessoa dado, int posicao){
     li->qntd++;    
     return 1;
 }
-bool remove_lista_inicio(Lista* li){
+bool remove_lista_inicio(Lista_Seq* li){
     if(li == NULL)
         return 0;
     li->numDeCompa++;
@@ -90,7 +91,7 @@ bool remove_lista_inicio(Lista* li){
     li->qntd--;
     return 1;
 }
-bool remove_lista_final(Lista* li){
+bool remove_lista_final(Lista_Seq* li){
     if(li==NULL)
         return 0;
     li->numDeCompa++;
@@ -101,7 +102,7 @@ bool remove_lista_final(Lista* li){
     li->qntd--; //APENAS DIMINUO A QNTD, POIS CASO HAJA A NESCESSIDADE DE UMA NOVA ADIÇÃO O VALOR EM QUESTÃO SERA SOBRESCREVIDO;
     return 1;
 }
-bool remove_lista_n_posicao(Lista* li, int posicao){
+bool remove_lista_n_posicao(Lista_Seq* li, int posicao){
     if(li==NULL)
         return 0;
     li->numDeCompa++;
@@ -115,25 +116,25 @@ bool remove_lista_n_posicao(Lista* li, int posicao){
     li->qntd--;
     return 1;
 }
-bool procura_rg(Lista* li, int inputRg){
+bool procura_rg(Lista_Seq* li, int inputRg){
     if(li==NULL)
         return 0;
     li->numDeCompa++;
     for(int i = 0, k = li->qntd-1;i<li->qntd; i++, k--){//percorro minha lista de 0 à 10 e de 10 à 0, simultaneamente, comparando o dado de entrada com o dado da minha lista;
         if(li->dados[i].rg == inputRg){
             li->numDeCompa++;
-            cout << li->dados[i].rg << li->dados[i].nome;
+            cout << "NOME:"<< li->dados[i].rg << ", RG:"<< li->dados[i].nome << " Posição:" << i <<"    ";
             return 1;
         } // caso o dado de entrada seja igual o dado da lista, printo os dados;
         if(li->dados[k].rg == inputRg){
             li->numDeCompa++;
-            cout << li->dados[k].rg << li->dados[k].nome;
+            cout << "NOME:"<< li->dados[k].rg << ", RG:"<< li->dados[k].nome << " Posição:" << k <<"    ";
             return 1;
         } // caso o dado de entrada seja igual o dado da lista, printo os dados;
     }
     return 0;
 }
-void escreve_arquivo(Lista* li){
+void escreve_arquivo(Lista_Seq* li){
     ofstream myfile("src/ListaEscrita.txt");
     if(myfile.is_open()){
         for(int i=0; i< li->qntd;i++)
@@ -142,7 +143,7 @@ void escreve_arquivo(Lista* li){
     }else
         cout << "Não foi possivel salvar o arquivo!";
 }
-void abrir_e_ler_arquivo(Lista* li){
+void abrir_e_ler_arquivo(Lista_Seq* li){
     string linha, inputNome, rgString;
     int inputRg, tamLinha,localizaEspaco=0,i=li->qntd, k=0,aux=0;
     ifstream myfile(NOME_ARQUIVO);
@@ -192,9 +193,10 @@ void menu(){
     cout << "\n|9- Salvar a lista em um arquivo;             |";
     cout << "\n|10- Ler uma lista de dados;                   |";
     cout << "\n|0- Para sair do programa;                     |";
+    cout << "\n|             LISTA SEQUENCIAL                 |";
     cout << "\n================================================\n";
 }
-void executar(int escolha, Lista* li){
+void executar(int escolha, Lista_Seq* li){
     li->numDeCompa++;
     Pessoa inputDado;
     bool retorno;
@@ -314,10 +316,13 @@ void executar(int escolha, Lista* li){
         system("clear");
     }else if(escolha ==8){
         inicioDaFuncao = clock();
-        printaLista(li);
+        retorno = printaLista(li);
+        if(!retorno)
+            cout << "Não foi possivel mostrar a lista.";
+        finalDaFuncao = clock();
         finalDaFuncao = clock();
         tempoDeExecucao= finalDaFuncao - inicioDaFuncao;
-        sleep(3);
+        sleep(4);
         cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
         system("clear");
     }else if(escolha ==9){
@@ -339,5 +344,4 @@ void executar(int escolha, Lista* li){
     aux = li->dados[0];
 
     cout << aux.nome;*/
-    
 }
