@@ -4,6 +4,8 @@ using namespace std;
 struct lista_enc{
     struct pessoa_enc dados;
     struct lista_enc *prox;
+    struct lista_enc *ultimo;
+
 };
 typedef struct lista_enc ListaEnc;
 
@@ -24,7 +26,7 @@ void apaga_lista_encad(Lista* li){
         free(li);
     }
 }
-bool adiciona_lista_enc_final(Lista* li, PessoaEnc dado, int* nCompa, int* nCopi){
+bool adiciona_lista_enc_final(Lista* li, PessoaEnc dado, long int* nCompa, long int* nCopi, int* qntd){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -34,21 +36,24 @@ bool adiciona_lista_enc_final(Lista* li, PessoaEnc dado, int* nCompa, int* nCopi
     *nCompa = *nCompa + 1;
     novoDado->dados = dado;
     novoDado->prox = NULL;
+    novoDado->ultimo = novoDado;
     if((*li) == NULL){// verifico se há algum dado na minha lista incial, caso não tenha apenas aloco o dado pois sera meu primeiro dado;
-        *nCompa = *nCompa + 1;
         *li = novoDado;
     }else{
         ListaEnc *aux; // declaro uma variavel auxiliar para nunca perder o começo da lista na operação ->prox;
         aux = *li;
-        while(aux->prox != NULL){ // percorro toda minha lista até chegar no ultimo dado: ->prox==null, sendo assim atualizo minha lista inserindo um dado na ultima posição;
-            aux = aux->prox;
-            *nCopi = *nCopi + 1;
-        }
-        aux->prox = novoDado;
+        //while(aux->prox != NULL){ // percorro toda minha lista até chegar no ultimo dado: ->prox==null, sendo assim atualizo minha lista inserindo um dado na ultima posição;
+            //aux = aux->prox;
+            //*nCopi = *nCopi + 1;
+        //}
+        aux->ultimo->prox= novoDado;
+        aux->ultimo=novoDado;
     }
+    *nCompa = *nCompa + 1;
+    qntd++;
     return 1;
 }
-bool adiciona_lista_enc_inicio(Lista* li, PessoaEnc dado, int* nCompa, int* nCopi){
+bool adiciona_lista_enc_inicio(Lista* li, PessoaEnc dado, long int* nCompa, long int* nCopi,int* qntd){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -56,12 +61,16 @@ bool adiciona_lista_enc_inicio(Lista* li, PessoaEnc dado, int* nCompa, int* nCop
     if(novoDado == NULL)
         return 0;
     *nCompa = *nCompa + 1;
+    //if(qntd==0)
     novoDado->dados = dado;
-    novoDado->prox = (*li);
+    novoDado->prox = NULL;
+    novoDado->ultimo = novoDado;
     *li = novoDado;
+    *nCompa = *nCompa + 1;
+    qntd++;
     return 1;
 }
-bool adiciona_lista_enc_n_posicao(Lista* li, PessoaEnc dado, int posicao, int* nCompa, int* nCopi){
+bool adiciona_lista_enc_n_posicao(Lista* li, PessoaEnc dado, int posicao, long int* nCompa, long int* nCopi, int* qntd){
     if(li == NULL)
     return 0;
     *nCompa = *nCompa + 1;
@@ -72,6 +81,7 @@ bool adiciona_lista_enc_n_posicao(Lista* li, PessoaEnc dado, int posicao, int* n
     novoDado->dados= dado;
     if(posicao > tamanho_lista(li, nCompa, nCopi))
         return 0;
+    *nCompa = *nCompa + 1;
     int i;
     ListaEnc* ant, *atual = *li;
     for(i=0; i< posicao-1; i++){
@@ -85,9 +95,10 @@ bool adiciona_lista_enc_n_posicao(Lista* li, PessoaEnc dado, int posicao, int* n
     novoDado->prox = atual;
     *nCopi = *nCopi +1;
     ant->prox = novoDado;
+    qntd++;
     return 1;
 }
-bool remove_lista_enc_inicio(Lista* li, int* nCompa, int* nCopi){
+bool remove_lista_enc_inicio(Lista* li, long int* nCompa, long int* nCopi, int* qntd){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -97,9 +108,10 @@ bool remove_lista_enc_inicio(Lista* li, int* nCompa, int* nCopi){
     ListaEnc *aux = *li;
     *li = aux->prox; //a faço minha lista receber o segundo dado;
     free(aux);//libero meu primeiro dado;
+    qntd--;
     return 1;
 }
-bool remove_lista_enc_final(Lista* li, int* nCompa, int* nCopi){
+bool remove_lista_enc_final(Lista* li, long int* nCompa, long int* nCopi, int* qntd){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -120,9 +132,10 @@ bool remove_lista_enc_final(Lista* li, int* nCompa, int* nCopi){
         ant->prox = aux->prox;
     *nCompa = *nCompa + 1;
     free(aux);
+    qntd--;
     return 1;
 }
-bool remove_lista_enc_n_posicao(Lista* li, int posicao, int* nCompa, int* nCopi){
+bool remove_lista_enc_n_posicao(Lista* li, int posicao, long int* nCompa, long int* nCopi, int* qntd){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -141,9 +154,10 @@ bool remove_lista_enc_n_posicao(Lista* li, int posicao, int* nCompa, int* nCopi)
     ant->prox = atual->prox;
     *nCopi = *nCopi +1;
     free(atual);
+    qntd--;
     return 1;
 }
-bool procura_rg_enc(Lista* li, int inputRg, int* nCompa, int* nCopi){
+bool procura_rg_enc(Lista* li, int inputRg, long int* nCompa, long int* nCopi){
     if(li== NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -158,7 +172,7 @@ bool procura_rg_enc(Lista* li, int inputRg, int* nCompa, int* nCopi){
         *nCopi = *nCopi +1;
     }
         if(atual != NULL){
-            cout << "NOME:"<< atual->dados.rg << ", RG:"<< atual->dados.nome << " Posição:" << i <<"    ";
+            cout << "NOME:"<< atual->dados.nome << ", RG:"<< atual->dados.rg << " Posição:" << i <<"    ";
             *nCompa = *nCompa + 1;
             return 1;
         }
@@ -166,7 +180,7 @@ bool procura_rg_enc(Lista* li, int inputRg, int* nCompa, int* nCopi){
             return 0;
     //cout << "NOME:"<< li->dados[k].rg << ", RG:"<< li->dados[k].nome << "    ";
 }
-int tamanho_lista(Lista* li, int* nCompa, int* nCopi){
+int tamanho_lista(Lista* li, long int* nCompa, long int* nCopi){
     if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -179,7 +193,7 @@ int tamanho_lista(Lista* li, int* nCompa, int* nCopi){
     }
     return cont;
 }
-bool imprime_lista(Lista* li, int* nCompa, int* nCopi){
+bool imprime_lista(Lista* li, long int* nCompa, long int* nCopi){
      if(li == NULL)
         return 0;
     *nCompa = *nCompa + 1;
@@ -191,7 +205,7 @@ bool imprime_lista(Lista* li, int* nCompa, int* nCopi){
     }
     return 1;
 }
-void escreve_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
+void escreve_arquivo_enc(Lista* li, long int* nCompa, long int* nCopi){
     ListaEnc* aux = *li;
     ofstream myfile("src/ListaEscrita.txt");
     if(myfile.is_open()){
@@ -205,7 +219,7 @@ void escreve_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
     }else
         cout << "Não foi possivel salvar o arquivo!";
 }
-void abrir_e_ler_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
+void abrir_e_ler_arquivo_enc(Lista* li, long int* nCompa, long int* nCopi, int* qntd){
     string linha, inputNome, rgString;
     int inputRg, tamLinha, localizaEspaco=0, k , aux;
     bool retorno;
@@ -214,6 +228,7 @@ void abrir_e_ler_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
     
     ifstream myfile(NOME_ARQUIVO);
     if(myfile.is_open()){
+        int i=0;
         while (getline(myfile,linha))
         {
             localizaEspaco = linha.find(",");//Localiza a primeira virgula;
@@ -223,8 +238,10 @@ void abrir_e_ler_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
             inputRg= stoi(rgString);
             atual.nome= inputNome;
             atual.rg= inputRg;
-            retorno = adiciona_lista_enc_final(li,atual, nCompa, nCopi);
-            if(retorno!= 0){
+            retorno = adiciona_lista_enc_final(li,atual, nCompa, nCopi, qntd);
+            cout << i << "\n";
+            i++;
+            if(retorno== 0){
                 cout << "Não foi possivel adicionar todos dados, memoria  cheia.";
                 myfile.close();
             }
@@ -233,6 +250,7 @@ void abrir_e_ler_arquivo_enc(Lista* li, int* nCompa, int* nCopi){
     }else
         cout << "Não foi possivel abir o arquivo!";
 }
+
 void limpaBufferListaEnc(){
     //__fpurge(stdin);
     fflush(stdin);

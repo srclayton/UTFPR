@@ -14,7 +14,7 @@ int main(){
     i.rg=5555;
     j.nome="jason";
     j.rg=6666;
-    k.nome="caralho";
+    k.nome="cascalho";
     k.rg=6666;
     Lista* li = cria_lista_encad();
     adiciona_lista_enc_inicio(li,x);
@@ -64,7 +64,7 @@ int main(){
     //abrir_e_ler_arquivo(li);
     //printaLista(li);*
     */
-    Lista_Seq* li_seq = cria_lista(); // CRIO UMA LISTA DE CADA;
+    Lista_Seq* li_seq = cria_lista(); // CRIO UMA LISTA;
     //Lista* li_enc = cria_lista_encad();
     int escolha=1;
     while (escolha != 0)

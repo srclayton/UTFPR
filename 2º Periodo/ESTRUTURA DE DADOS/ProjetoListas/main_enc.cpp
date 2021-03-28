@@ -3,7 +3,8 @@ void executar_enc(Lista* li,int escolha);
 int main(){
    Lista* li = cria_lista_encad();
    int posicao, escolha=1, inputRg;
-   int numDeCompa=0, numDeCopi=0;
+   long int numDeCompa=0, numDeCopi=0;
+   int qntd=0;
    PessoaEnc inputDado;
    bool retorno;
    clock_t inicioDaFuncao, finalDaFuncao;
@@ -23,7 +24,7 @@ int main(){
                 cout << "\nDigite o RG:";
                 cin >> inputDado.rg;
                 inicioDaFuncao = clock();
-                retorno = adiciona_lista_enc_inicio(li, inputDado, &numDeCompa, &numDeCopi);
+                retorno = adiciona_lista_enc_inicio(li, inputDado, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno){
                     cout << "ATENÇÃO      ";
                     cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
@@ -34,6 +35,8 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
            }else if(escolha ==2){ // INSERE UM DADO NO FINAL DA LISTA
                 limpaBufferListaEnc();
@@ -43,7 +46,7 @@ int main(){
                 cout << "\nDigite o RG:";
                 cin >> inputDado.rg;
                 inicioDaFuncao = clock();
-                retorno = adiciona_lista_enc_final(li, inputDado, &numDeCompa, &numDeCopi);
+                retorno = adiciona_lista_enc_final(li, inputDado, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno){
                     cout << "ATENÇÃO      ";
                     cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
@@ -54,6 +57,8 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";    
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");        
             }else if(escolha ==3){ // INSERE UM DADO NA N POSIÇÃO DA LISTA
                 limpaBufferListaEnc();
@@ -66,7 +71,7 @@ int main(){
                 cout << "\nDigite a posição:";
                 cin >> posicao;
                 inicioDaFuncao = clock();
-                retorno = adiciona_lista_enc_n_posicao(li, inputDado, posicao, &numDeCompa, &numDeCopi);
+                retorno = adiciona_lista_enc_n_posicao(li, inputDado, posicao, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno){
                     cout << "ATENÇÃO      ";
                     cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
@@ -77,10 +82,12 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==4){ // REMOVE UM DADO NO INICIO DA LISTA
                 inicioDaFuncao = clock ();
-                retorno = remove_lista_enc_inicio(li, &numDeCompa, &numDeCopi);
+                retorno = remove_lista_enc_inicio(li, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno)
                     cout << "Não foi possivel remover.";
                 else
@@ -88,10 +95,12 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==5){ // REMOVE UM DADO NO FINAL DA LISTA
                 inicioDaFuncao = clock();
-                retorno = remove_lista_enc_final(li, &numDeCompa, &numDeCopi);
+                retorno = remove_lista_enc_final(li, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno)
                     cout << "Não foi possivel remover.";
                 else    
@@ -99,13 +108,15 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==6){ // REMOVE UM DADO NA N POSIÇÃO DA LISTA
                 limpaBufferListaEnc();
                 cout << "\nDigite a posição:";
                 cin >> posicao;
                 inicioDaFuncao = clock();
-                retorno = remove_lista_enc_n_posicao(li, posicao, &numDeCompa, &numDeCopi);
+                retorno = remove_lista_enc_n_posicao(li, posicao, &numDeCompa, &numDeCopi, &qntd);
                 if(!retorno)
                     cout << "Não foi possivel remover.";
                 else
@@ -113,6 +124,8 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==7){ // FAZ A BUSCA DE UM RG NA LISTA
                 limpaBufferListaEnc();
@@ -125,6 +138,8 @@ int main(){
                 finalDaFuncao = clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==8){
                 inicioDaFuncao = clock();
@@ -136,6 +151,8 @@ int main(){
                 tempoDeExecucao= finalDaFuncao - inicioDaFuncao;
                 sleep(4);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==9){
                 inicioDaFuncao= clock();
@@ -143,13 +160,17 @@ int main(){
                 finalDaFuncao= clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }else if(escolha ==10){
                 inicioDaFuncao = clock();
-                abrir_e_ler_arquivo_enc(li, &numDeCompa, &numDeCopi);
+                abrir_e_ler_arquivo_enc(li, &numDeCompa, &numDeCopi, &qntd);
                 finalDaFuncao= clock();
                 tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
                 cout << "C(n):" << numDeCompa << "  |  " << "M(n):" <<  numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+                numDeCompa=0;
+                numDeCopi=0;
                 system("clear");
             }
        }else{
@@ -172,7 +193,7 @@ int main(){
     i.rg=5555;
     j.nome="jason";
     j.rg=6666;
-    k.nome="caralho";
+    k.nome="cascalho";
     k.rg=6666;
     Lista* li = cria_lista_encad();
     adiciona_lista_enc_inicio(li,x);
@@ -197,4 +218,3 @@ int main(){
     return 0;
     
 }
-
