@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1583849436 source:/home/botter/Documentos/tecprog/ex01/pessoa.cpp
-	"pessoa.h"
-
-1583849433 /home/botter/Documentos/tecprog/ex01/pessoa.h
-	<stdio.h>
-
