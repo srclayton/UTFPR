@@ -2,8 +2,8 @@ package principal;
 
 public class Faxineiro extends Empregado{
     
-    Faxineiro(String nome, int cpf){
-        super(nome, "Faxineiro", cpf);
+    Faxineiro(String nomeaux, int cpfaux){
+        super(nomeaux, "Faxineiro", cpfaux);
     }
     
     @Override
