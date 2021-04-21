@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+/mnt/hgfs/Cubuntu/UTFPR/2º Periodo/TECPROG-2021/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
+646308851.index
+650078515.index
+3357350666.index

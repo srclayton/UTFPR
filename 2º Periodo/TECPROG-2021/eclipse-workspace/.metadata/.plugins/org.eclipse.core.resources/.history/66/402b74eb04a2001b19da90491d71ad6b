@@ -1,0 +1,36 @@
+package fase;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import player.Player;
+
+public class Fase extends JPanel{
+	private Image fundo;
+	private Player player;
+	public Fase(){
+		
+		ImageIcon img = new ImageIcon("res\\City4.png");
+		this.fundo = img.getImage();
+		
+	}
+	
+	public void paint(Graphics g) {
+		Graphics2D graficos = (Graphics2D) g;
+		graficos.drawImage(fundo, 0, 0, null);
+		g.dispose();
+	}
+
+	
+}
