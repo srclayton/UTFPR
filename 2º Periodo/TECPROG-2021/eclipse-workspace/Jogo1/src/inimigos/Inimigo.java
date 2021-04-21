@@ -1,55 +1,37 @@
 package inimigos;
 
-import java.awt.Image;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-public class Inimigo {
-	private Image img;
-	private int x, y;
-	private int largura, altura;
-	private boolean visivel;
-	
-	private static int VELOCIDADE = 2;
-	
-	
+import player.Player;
+
+public class Inimigo extends Player{
+	private static int qntd = 50;
 	public Inimigo(int x, int y) {
-		this.x = x;
-		this.y = y;
-		visivel = true;
+		super(x, y);
+		
 	}
-	
+	@Override
 	public void load() {
 		ImageIcon src = new ImageIcon("res\\player1.png");
 		img = src.getImage();
-		
-		this.altura = img.getHeight(null);
-		this.largura = img.getWidth(null);
+		altura = img.getHeight(null);
+		largura = img.getWidth(null);
 	}
-	
+	@Override
+	public void keyPressed(KeyEvent tecla) {
+		
+	}
+	@Override
+	public void KeyRelease(KeyEvent tecla) {
+		
+	}
+	@Override
 	public void update() {
-		this.x -= VELOCIDADE;
-		
+		x -= 2;
 	}
-	public boolean getVisivel() {
-		return visivel;
-	}
-	public void setVisivel(boolean visivel) {
-		this.visivel = visivel;
-	}
-	public static int getVELOCIDADE() {
-		return VELOCIDADE;
-	}
-	public static void setVELOCIDADE(int vELOCIDADE) {
-		VELOCIDADE = vELOCIDADE;
-	}
-	public int getX() {
-		return x;
-	}
-	public int getY(){
-		return y;
-	}
-	public Image getImage() {
-		return img;
+	public static int getQntd() {
+		return qntd;
 	}
 }

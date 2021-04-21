@@ -5,8 +5,8 @@ import fase.Fase;
 public class Janela extends JFrame{
 	
 	private  int numOperacao = 3; // quantidade de operação da janela, maximizar, fechar e minimizar;
-	private static int alturaJanela = 1336; // seto a altura e largura da janela;
-	private static int larguraJanela = 720;
+	private static int alturaJanela = 1024; // seto a altura e largura da janela;
+	private static int larguraJanela = 728;
 	
 	public Janela() {
 		add(new Fase()); // adiciona a fase para rolar;

@@ -5,6 +5,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 public class Player2 extends Player {
+	public Player2(int x, int y) {
+		super(x, y);
+	}
+
 	@Override
 	public void load() {
 		ImageIcon src = new ImageIcon("res\\mira2.png");

@@ -11,9 +11,9 @@ public class Player {
 	protected Image img;
 	protected int altura, largura;
 
-	public Player() {
-		this.x = 100; //coordenada de spawn;
-		this.y = 100;//coordenada de spawn;
+	public Player(int x, int y) {
+		this.x = x; //coordenada de spawn;
+		this.y = y;//coordenada de spawn;
 	}
 
 	public void load() {
