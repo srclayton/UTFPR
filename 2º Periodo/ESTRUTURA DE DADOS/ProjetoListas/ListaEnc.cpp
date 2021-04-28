@@ -42,6 +42,7 @@ bool adiciona_lista_enc_final(Lista* li, PessoaEnc dado, long int* nCompa, long 
     }else{
         ListaEnc *aux; // declaro uma variavel auxiliar para nunca perder o começo da lista na operação ->prox;
         aux = *li;
+            *nCopi = *nCopi +1;
         //while(aux->prox != NULL){ // percorro toda minha lista até chegar no ultimo dado: ->prox==null, sendo assim atualizo minha lista inserindo um dado na ultima posição;
             //aux = aux->prox;
             //*nCopi = *nCopi + 1;
@@ -239,7 +240,7 @@ void abrir_e_ler_arquivo_enc(Lista* li, long int* nCompa, long int* nCopi, int* 
             atual.nome= inputNome;
             atual.rg= inputRg;
             retorno = adiciona_lista_enc_final(li,atual, nCompa, nCopi, qntd);
-            cout << i << "\n";
+            //cout << i << "\n";
             i++;
             if(retorno== 0){
                 cout << "Não foi possivel adicionar todos dados, memoria  cheia.";
