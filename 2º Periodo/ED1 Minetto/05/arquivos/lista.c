@@ -11,7 +11,7 @@ int conta_nos_itr (Lista* lista) {
       i++;
       tmp = tmp->next;
     }
-    return i; // i+=1 pois o while nao contabiliza o ultimo no.
+    return i; 
 }
 
 int conta_nos_rec (Lista* lista) {
