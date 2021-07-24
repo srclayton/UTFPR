@@ -1,0 +1,118 @@
+
+th{
+    width: 280px;
+    height: 40px;
+}
+th img{
+    width: 30px;
+}
+.grey{
+    background-color: rgb(192, 192, 192);
+    color: black;
+    border-radius: 5px;
+}
+.red{
+    background-color: rgb(190, 71, 71);
+    color: aliceblue;
+    border-radius: 5px;
+}
+.green{
+    background-color: rgb(71, 190, 71);
+    color: aliceblue;
+    border-radius: 5px;
+}
+.left{
+    text-align: left;
+}
+
+
+/* 30/07 */
+.search{
+    background-color: rgb(192, 192, 192);
+    text-align: center;
+    height: 40px;
+    padding-top:25px;
+    border-radius: 5px;
+}
+.container{
+    margin-left:10%;
+    margin-right:10%;
+}
+tbody tr:nth-child(odd) {
+    background:rgb(240, 238, 145);
+}
+
+#px{
+    width: 50px;
+}
+#acoes{
+    width: 100px;
+}
+#esquerda {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+
+
+
+/* 07/07 */
+.menu{
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.menu li{
+    display: inline-block;
+    border-top: 3px solid rgb(195, 193, 193);
+    
+}
+.menu li:hover{
+    border-color: red;
+    color: red;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+ 
+
+
+.menu2{
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+.menu2 li{
+    display: inline-block;
+    background-color: grey;
+    color: white;
+    padding: 5px;    
+}
+.menu2 li:hover{
+    background-color: blue;
+    color: grey;
+}
+
+
+.menu3{
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100px;
+}
+.menu3 li{
+    background-color: grey;
+    background-size: 30%;
+    color: white;
+    padding: 5px;    
+}
+.menu3 li:hover{
+    background-color: blue;
+    color: grey;
+}

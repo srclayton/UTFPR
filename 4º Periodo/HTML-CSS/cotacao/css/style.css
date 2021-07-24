@@ -1,0 +1,29 @@
+html{background-color:beige}
+.grid-container{
+    margin: 10%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    border: 2 solid black;
+
+}
+.grid-item{
+    grid-column: 3fr;
+}
+
+.menu{
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+}
+.menu li{
+    display: inline-block;
+    margin: 1%;
+}
+.menu li:hover{
+    border-color: red;
+    color: red;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}

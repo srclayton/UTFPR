@@ -51,8 +51,8 @@ bool printaLista(Lista_Seq* li){
         return 0;
     li->numDeCompa++;
     for (int i = 0; i < li->qntd; i++)
-        cout << i+1 << "° " << li->dados[i].nome << ", "<< li->dados[i].rg <<"\n";   
-    return 1; 
+        cout << i+1 << "° " << li->dados[i].nome << ", "<< li->dados[i].rg <<"\n";
+    return 1;
 }
 bool adiciona_lista_n_posicao(Lista_Seq* li, Pessoa dado, int posicao){
     if(li==NULL)
@@ -72,9 +72,9 @@ bool adiciona_lista_n_posicao(Lista_Seq* li, Pessoa dado, int posicao){
         li->dados[i+1] = li->dados[i]; // empurro os dados da posição N em diante para a direita;
         li->numDeCopi++;
     }
-    
+
     li->dados[i+1]=dado;
-    li->qntd++;    
+    li->qntd++;
     return 1;
 }
 bool remove_lista_inicio(Lista_Seq* li){
@@ -139,7 +139,7 @@ void escreve_arquivo(Lista_Seq* li){
     if(myfile.is_open()){
         for(int i=0; i< li->qntd;i++)
             myfile << li->dados[i].nome << "," << li->dados[i].rg << "\n";
-        cout << "Lista salva com sucesso!";   
+        cout << "Lista salva com sucesso!";
     }else
         cout << "Não foi possivel salvar o arquivo!";
 }
@@ -149,7 +149,7 @@ void abrir_e_ler_arquivo(Lista_Seq* li){
     ifstream myfile(NOME_ARQUIVO);
     if(myfile.is_open()){
         while (getline(myfile,linha))
-        {   
+        {
             if(li->qntd!=TAM){
                 li->numDeCompa++;
                 localizaEspaco = linha.find(","); // localiza a primeira virgula;
@@ -164,13 +164,13 @@ void abrir_e_ler_arquivo(Lista_Seq* li){
                 k++;
                 li->numDeCopi++;
             }else{
-                cout << "Não foi possivel adicionar os dados " << k << "em diante."; 
+                cout << "Não foi possivel adicionar os dados " << k << "em diante.";
                 myfile.close();
                 aux=1;
-            }  
+            }
         }
         if(aux!=1)
-            cout << "Lista aberta com sucesso!";    
+            cout << "Lista aberta com sucesso!";
 
     }else
         cout << "Não foi possivel abrir o arquivo!";
@@ -214,10 +214,10 @@ void executar(int escolha, Lista_Seq* li){
         retorno = adiciona_lista_inicio(li, inputDado);
         if(!retorno){
             cout << "ATENÇÃO      ";
-            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
+            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";
         }else{
             cout << "ATENÇÃO      ";
-            cout << "Dado adicionado com sucesso!."; 
+            cout << "Dado adicionado com sucesso!.";
         }
         finalDaFuncao = clock();
         tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
@@ -234,15 +234,15 @@ void executar(int escolha, Lista_Seq* li){
         retorno = adiciona_lista_final(li, inputDado);
         if(!retorno){
             cout << "ATENÇÃO      ";
-            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
+            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";
         }else{
             cout << "ATENÇÃO      ";
-            cout << "Dado adicionado com sucesso!."; 
-        }       
+            cout << "Dado adicionado com sucesso!.";
+        }
         finalDaFuncao = clock();
         tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
-        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";    
-        system("clear");        
+        cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
+        system("clear");
     }else if(escolha ==3){ // INSERE UM DADO NA N POSIÇÃO DA LISTA
         limpaBufferDoTeclado();
         cout << "\nDigite o nome desejado:";
@@ -257,11 +257,11 @@ void executar(int escolha, Lista_Seq* li){
         retorno = adiciona_lista_n_posicao(li, inputDado, posicao);
         if(!retorno){
             cout << "ATENÇÃO      ";
-            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";    
+            cout << "Não foi possivel armazenar os dados, memoria indisponivel.";
         }else{
             cout << "ATENÇÃO      ";
-            cout << "Dado adicionado com sucesso!."; 
-        }  
+            cout << "Dado adicionado com sucesso!.";
+        }
         finalDaFuncao = clock();
         tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);
         cout << "C(n):" << li->numDeCompa << "  |  " << "M(n):" <<  li->numDeCopi <<  "Tempo de Execução:" << tempoDeExecucao << "  Nanoseconds";
@@ -282,7 +282,7 @@ void executar(int escolha, Lista_Seq* li){
         retorno = remove_lista_final(li);
         if(!retorno)
             cout << "Não foi possivel remover.";
-        else    
+        else
             cout << "Dado retirado com sucesso!";
         finalDaFuncao = clock();
         tempoDeExecucao = (finalDaFuncao - inicioDaFuncao);

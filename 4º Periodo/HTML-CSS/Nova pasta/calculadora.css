@@ -1,0 +1,51 @@
+div.main {
+	border-radius: 15px;
+	text-align:center;
+	padding:30px;
+	width: 380px;
+	background: url(steel.png);
+	box-shadow: 5px 5px;
+}
+button {
+	border-radius: 15px;
+	padding: 15px;
+	margin: 5px;
+	width: 60px;
+	height: 60px;
+	font-weight: bolder;
+	font-size: larger;
+	background: black;
+	color: white;	
+	text-shadow: 1px 1px 3px silver;
+}
+button:active {
+	box-shadow: 1px 1px white;
+	color: yellow;
+}
+button.vermelho {
+	background: darkred;
+}
+button.verde {
+	background: darkgreen;
+	font-size: large;
+}		
+button.cinza {
+	background: grey;
+	font-size: large;
+}
+button#igual {
+	width: 135px;
+}
+div div#display {
+	background: url(vidro.png);;
+	border: 5px solid black;
+	width: 280px;
+	text-align: right;
+	font-size: xx-large;
+	margin: auto;
+	padding: 20px;
+	margin-bottom: 30px;
+	border-radius: 15px;
+	box-shadow: 2px 2px;
+	overflow:hidden;
+}

@@ -12,7 +12,7 @@ int main(){
         printf("\n\nDigite o numero ou digite 0 para sai.\n");
         scanf("%ld", &input);
         if(input != 0)
-        executar(input);    
+        executar(input);
     }
     return 0;
 }
@@ -36,10 +36,10 @@ void executar(long int input){
             aplica_luhn(input, &soma_numr);
             valid_num = valida_soma(soma_numr);
             if(tamanho_num == 13){
-                if(operadora == 4){ 
+                if(operadora == 4){
                     if(valid_num == 1)
                         printf("%ld, Visa, válido", input);
-                    else 
+                    else
                         printf("%ld, Visa, invalido", input);
                 }
                 else
@@ -47,7 +47,7 @@ void executar(long int input){
 
             }
             else if(tamanho_num == 14){
-                if(operadora == 30 || operadora == 36 || operadora == 38){ 
+                if(operadora == 30 || operadora == 36 || operadora == 38){
                     if(valid_num == 1)
                         printf("%ld, Diners, válido", input);
                     else
@@ -77,7 +77,7 @@ void executar(long int input){
                 }
                 else
                 printf("%ld Operadora desconhecida", input);
-                
+
             }
             else if(tamanho_num == 16){
                 if(operadora >= 51 && operadora <= 55){
@@ -105,8 +105,8 @@ void executar(long int input){
                         printf("%ld, JCB, invalido", input);
                 }
                 else
-                printf("%ld Operadora desconhecida", input);                
-            }           
+                printf("%ld Operadora desconhecida", input);
+            }
         }
     }
 }
@@ -142,7 +142,7 @@ int verifica_operado(long int numero_cartao, int tamanho, int* ptr_operadora){
             *ptr_operadora = operadora;
             return 1;
         }
-        else 
+        else
         return 0;
 }
 int valida_soma(int num){
